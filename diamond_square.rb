@@ -1,16 +1,23 @@
 #!/usr/bin/ruby -w
 
-require 'rubygems'
-require 'RMagick'
+def find_squares(surface)
+  #assumed: surface is square, at least 3x3
+  width = height = surface.count
+  squares = []
 
-max_rgb = Magick::QuantumRange
+  0.upto(height - 2) do |y|
+    row = []
 
-img = Magick::Image.new(257,257)
+    0.upto(width - 2) do |x|
+      upper_left = surface[y][x]
+      upper_right = surface[y][x+1]
+      lower_left = surface[y+1][x]
+      lower_right = surface[y+1][x+1]
+      row << [ upper_left, upper_right, lower_left, lower_right ]
+    end
 
-0.upto(256) do |x|
-  0.upto(256) do |y|
-    img.pixel_color(x, y, Magick::Pixel.new(x**2, (x-y)**2, y**2, 30000))
+    squares << row
   end
-end
 
-img.write("surface.gif")
+  squares
+end

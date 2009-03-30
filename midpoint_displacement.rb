@@ -51,9 +51,9 @@ anim = Magick::ImageList.new
 width = 512
 height = 512
 iterations = (Math.log(width) / Math.log(2)).to_i
-roughness = 1.0
+roughness = 0.5
 
-perform_iterations([0.0, 0.0], iterations, 0.5, roughness){|iter, line, range|
+perform_iterations([0.0, 0.0], iterations, 0.99, roughness){|iter, line, range|
   draw_line(iter, line, range, width, height, anim)
   print_line(iter, line, range)
 }
